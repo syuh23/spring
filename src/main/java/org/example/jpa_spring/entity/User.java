@@ -1,10 +1,10 @@
 package org.example.jpa_spring.entity;
 
 import lombok.*;
-import jakarta.persistence.*;  //javax -> jakarta 로 이름 변경
+import jakarta.persistence.*;
 
-// 여기서 내가 class로 정의해주면 JPA가 분석하고 알아서 테이블을 생성해줌 !
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,8 +20,4 @@ public class User {
 
     @Column(nullable = true)
     private String password;
-
-    public void update(String password) {
-        this.password = password;
-    }
 }
