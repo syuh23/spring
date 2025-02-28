@@ -4,7 +4,7 @@ import lombok.*;
 
 @Getter
 @Builder
-public class FormUser {
+public class SignUpRequest {
     private String name;
     private String password;
 }

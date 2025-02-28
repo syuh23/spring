@@ -3,7 +3,7 @@ package org.example.jpa_spring.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.jpa_spring.entity.User;
-import org.example.jpa_spring.dto.request.FormUser;
+import org.example.jpa_spring.dto.request.SignUpRequest;
 import org.example.jpa_spring.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createUser(FormUser formUser) {
+    public void signUp(SignUpRequest signUpRequest) {
         User createUser = User.builder()
-                .name(formUser.getName())
-                .password(formUser.getPassword())
+                .name(signUpRequest.getName())
+                .password(signUpRequest.getPassword())
                 .build();
         userRepository.save(createUser);
     }

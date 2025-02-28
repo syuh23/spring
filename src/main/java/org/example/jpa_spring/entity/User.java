@@ -11,13 +11,21 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    @Column(name = "user_id", updatable = false, nullable = false)
+    private Long userId;
 
-    @Column(nullable = true)
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = true)
+    @Column(nullable = false, length = 100)
+    private String email;
+
+    @Column(nullable = false, length = 20)
     private String password;
+
+    @Column(name = "is_user_deleted", nullable = false)
+    private boolean isUserDeleted;
 }
