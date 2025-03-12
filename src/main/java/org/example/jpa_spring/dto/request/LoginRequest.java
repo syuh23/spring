@@ -1,11 +1,11 @@
 package org.example.jpa_spring.dto.request;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder
-public class SignUpRequest {
-    private String name;
+public class LoginRequest {
     private String email;
     private String password;
 }

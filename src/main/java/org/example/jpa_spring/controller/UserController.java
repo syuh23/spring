@@ -1,6 +1,7 @@
 package org.example.jpa_spring.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.jpa_spring.dto.request.LoginRequest;
 import org.example.jpa_spring.entity.User;
 import org.example.jpa_spring.dto.request.SignUpRequest;
 import org.example.jpa_spring.service.UserService;
@@ -21,10 +22,11 @@ public class UserController {
         userService.signUp(signUpRequest);
     }
 
-    @GetMapping("/find")
-    public Optional<User> findUser(@RequestParam("user_id") Long user_id) {
-        Optional<User> user = userService.findUser(user_id);
-        return user;
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest loginRequest) {
+        Optional<User> user = userService.findUser(loginRequest);
+        String loginReturn = userService.login(loginRequest, user.get());
+        return loginReturn;
     }
 
     @PostMapping("/edit/{user_id}")
