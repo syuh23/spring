@@ -21,36 +21,5 @@
  crashlytics-build.properties
  fabric.propertie
  .env
- build/
-
-/build/resources/main/application.properties
-/.gradle/buildOutputCleanup/buildOutputCleanup.lock
-/.gradle/buildOutputCleanup/cache.properties
-/.gradle/8.7/checksums/checksums.lock
-/.gradle/8.7/executionHistory/executionHistory.bin
-/.gradle/8.7/executionHistory/executionHistory.lock
-/.gradle/file-system.probe
-/.gradle/8.7/fileHashes/fileHashes.bin
-/.gradle/8.7/fileHashes/fileHashes.lock
-/build/classes/java/main/org/example/jpa_spring/dto/request/FormUser$FormUserBuilder.class
-/build/classes/java/main/org/example/jpa_spring/dto/request/FormUser.class
-/.gradle/8.7/dependencies-accessors/gc.properties
-/.gradle/8.7/gc.properties
-/.gradle/vcs-1/gc.properties
-/build/classes/java/main/org/example/jpa_spring/JpaSpringApplication.class
-/.gradle/8.7/fileChanges/last-build.bin
-/.gradle/8.7/checksums/md5-checksums.bin
-/.gradle/buildOutputCleanup/outputFiles.bin
-/build/tmp/compileJava/previous-compilation-data.bin
-/.gradle/8.7/fileHashes/resourceHashesCache.bin
-/.gradle/8.7/checksums/sha1-checksums.bin
-/build/classes/java/main/org/example/jpa_spring/entity/User$UserBuilder.class
-/build/tmp/compileJava/compileTransaction/stash-dir/User$UserBuilder.class.uniqueId3
-/build/classes/java/main/org/example/jpa_spring/entity/User.class
-/build/tmp/compileJava/compileTransaction/stash-dir/User.class.uniqueId4
-/build/classes/java/main/org/example/jpa_spring/controller/UserController.class
-/build/tmp/compileJava/compileTransaction/stash-dir/UserController.class.uniqueId0
-/build/classes/java/main/org/example/jpa_spring/repository/UserRepository.class
-/build/tmp/compileJava/compileTransaction/stash-dir/UserRepository.class.uniqueId2
-/build/classes/java/main/org/example/jpa_spring/service/UserService.class
-/build/tmp/compileJava/compileTransaction/stash-dir/UserService.class.uniqueId1
+ /build
+ /.gradle
