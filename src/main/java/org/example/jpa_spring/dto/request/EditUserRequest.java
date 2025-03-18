@@ -1,11 +1,13 @@
 package org.example.jpa_spring.dto.request;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Builder
 public class EditUserRequest {
-    private Long user_id;
+
+    private Long userId;
+
     private String password;
+
 }

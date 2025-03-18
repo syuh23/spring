@@ -1,6 +1,7 @@
 package org.example.jpa_spring.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.jpa_spring.dto.request.EditUserRequest;
 import org.example.jpa_spring.dto.request.LoginRequest;
 import org.example.jpa_spring.dto.request.UserIdRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -19,10 +21,11 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signUp(@RequestBody SignUpRequest signUpRequest) {
+        log.info("signUp request : {}", signUpRequest.getName());
         return userService.signUp(signUpRequest);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public String login(@RequestBody LoginRequest loginRequest) {
         Optional<User> user = userService.findUserByEmail(loginRequest);
         return userService.login(loginRequest, user.get());
@@ -37,4 +40,8 @@ public class UserController {
     public String deleteUser(@RequestBody UserIdRequest userIdRequest) {
         return userService.deleteUser(userIdRequest);
     }
+
+    //TODO. log 붙이기
+    //TODO. Response Entity로 반환하기 -> 어떤 것을 리턴해줄 것인지 잘 생각해보기
+    //TODO. @RequestBody, @PathVariable? 찾아보기
 }
