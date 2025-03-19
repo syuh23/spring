@@ -13,22 +13,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
     @PostMapping("/signup")
     public String signUp(@RequestBody SignUpRequest signUpRequest) {
-        log.info("signUp request : {}", signUpRequest.getName());
         return userService.signUp(signUpRequest);
     }
 
     @PostMapping("/signin")
     public String login(@RequestBody LoginRequest loginRequest) {
-        Optional<User> user = userService.findUserByEmail(loginRequest);
-        return userService.login(loginRequest, user.get());
+        return userService.signIn(loginRequest);
     }
 
     @PostMapping("/user/edit")
@@ -44,4 +42,5 @@ public class UserController {
     //TODO. log 붙이기
     //TODO. Response Entity로 반환하기 -> 어떤 것을 리턴해줄 것인지 잘 생각해보기
     //TODO. @RequestBody, @PathVariable? 찾아보기
+
 }
