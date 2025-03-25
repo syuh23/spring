@@ -35,8 +35,8 @@ public class UserService {
         userRepository.save(createUser);
 
         log.info("created user {}", signUpRequest.getEmail());
-
         return "User created : " + signUpRequest.getName() + "님";
+
     }
 
     @Transactional
@@ -52,44 +52,44 @@ public class UserService {
         }
 
         log.info("User signed in {}", user.getName());
-
         return "User signed in : " + loginRequest.getEmail();
+
     }
 
     @Transactional
     public String updateUser(EditUserRequest editUserRequest) {
 
-        if(findUserByUserId(editUserRequest.getUser_id()).isPresent()) {
-            User user = findUserByUserId(editUserRequest.getUser_id()).get();
+        if(findUserByUserId(editUserRequest.getUserId()).isPresent()) {
+            User user = findUserByUserId(editUserRequest.getUserId()).get();
+
             user.setPassword(editUserRequest.getPassword());
             userRepository.save(user);
-            return "User updated : " + user.getName();
+
+            log.info("updated user {}", user.getName());
+            return user.getName() + "님의 회원 정보가 변경되었습니다.";
+
         } else {
-            return "User not found : " + editUserRequest.getUser_id();
+            log.info("user not found in updateUser {}", editUserRequest.getUserId());
+            return "일치하는 회원 정보를 찾을 수 없습니다.";
+
         }
     }
 
     @Transactional
     public String deleteUser(UserIdRequest userIdRequest) {
-        if(findUserByUserId(userIdRequest.getUser_id()).isPresent()) {
-            User user = findUserByUserId(userIdRequest.getUser_id()).get();
+        if(findUserByUserId(userIdRequest.getUserId()).isPresent()) {
+            User user = findUserByUserId(userIdRequest.getUserId()).get();
+
             user.setUserDeleted(true);
             userRepository.save(user);
-            return "User deleted update : " + user.getName();
+
+            log.info("deleted user {}", user.getName());
+            return "회원 탈퇴가 완료되었습니다.";
+
         } else {
-            return "User not found : " + userIdRequest.getUser_id();
+            log.info("user not found in deleteUser {}", userIdRequest.getUserId());
+            return "일치하는 회원 정보를 찾을 수 없습니다.";
         }
-    }
-
-//    @Transactional
-//    protected boolean duplicateEmail(SignUpRequest signUpRequest) {
-//        return userRepository.findByEmail(signUpRequest.getEmail()).isPresent();
-//    }
-
-    @Transactional
-    public Optional<User> findUserByEmail(LoginRequest loginRequest) {
-        Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
-        return user;
     }
 
     @Transactional
