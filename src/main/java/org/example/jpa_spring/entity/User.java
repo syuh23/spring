@@ -28,4 +28,5 @@ public class User {
 
     @Column(name = "is_user_deleted", nullable = false)
     private boolean isUserDeleted;
+
 }

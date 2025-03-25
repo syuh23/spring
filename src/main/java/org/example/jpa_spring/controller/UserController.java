@@ -1,7 +1,10 @@
 package org.example.jpa_spring.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.jpa_spring.dto.request.EditUserRequest;
 import org.example.jpa_spring.dto.request.LoginRequest;
+import org.example.jpa_spring.dto.request.UserIdRequest;
 import org.example.jpa_spring.entity.User;
 import org.example.jpa_spring.dto.request.SignUpRequest;
 import org.example.jpa_spring.service.UserService;
@@ -13,29 +16,31 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
-    //TODO. SRP를 생각하면서 코드 작성
     @PostMapping("/signup")
-    public void signUp(@RequestBody SignUpRequest signUpRequest) {
-        //TODO. Email 중복 확인
-        userService.signUp(signUpRequest);
+    public String signUp(@RequestBody SignUpRequest signUpRequest) {
+        return userService.signUp(signUpRequest);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public String login(@RequestBody LoginRequest loginRequest) {
-        Optional<User> user = userService.findUser(loginRequest);
-        String loginReturn = userService.login(loginRequest, user.get());
-        return loginReturn;
+        return userService.signIn(loginRequest);
     }
 
-    @PostMapping("/edit/{user_id}")
-    public void updateUser(@PathVariable Long user_id, String password) {
-        userService.updateUser(user_id, password);
+    @PostMapping("/user/edit")
+    public String updateUser(@RequestBody EditUserRequest editUserRequest) {
+        return userService.updateUser(editUserRequest);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteUser(@RequestParam("user_id") Long user_id) {
-        userService.deleteUser(user_id);
+    @PostMapping("/user/delete")
+    public String deleteUser(@RequestBody UserIdRequest userIdRequest) {
+        return userService.deleteUser(userIdRequest);
     }
+
+    //TODO. log 붙이기
+    //TODO. Response Entity로 반환하기 -> 어떤 것을 리턴해줄 것인지 잘 생각해보기
+    //TODO. @RequestBody, @PathVariable? 찾아보기
+
 }

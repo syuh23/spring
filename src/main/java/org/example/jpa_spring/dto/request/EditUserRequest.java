@@ -4,9 +4,9 @@ import lombok.*;
 
 @Getter
 @Builder
-public class LoginRequest {
+public class EditUserRequest {
 
-    private String email;
+    private Long userId;
 
     private String password;
 
