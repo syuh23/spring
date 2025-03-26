@@ -4,7 +4,7 @@ import lombok.*;
 
 @Getter
 @Builder
-public class LoginRequest {
+public class SignInRequest {
 
     private String email;
 

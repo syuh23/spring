@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.jpa_spring.dto.request.EditUserRequest;
-import org.example.jpa_spring.dto.request.LoginRequest;
+import org.example.jpa_spring.dto.request.SignInRequest;
 import org.example.jpa_spring.dto.request.UserIdRequest;
 import org.example.jpa_spring.entity.User;
 import org.example.jpa_spring.dto.request.SignUpRequest;
@@ -21,7 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public String signUp(SignUpRequest signUpRequest) {
+    public void signUp(SignUpRequest signUpRequest) {
 
         if(userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
             log.info("duplicate email address {}", signUpRequest.getEmail());
@@ -35,25 +35,21 @@ public class UserService {
         userRepository.save(createUser);
 
         log.info("created user {}", signUpRequest.getEmail());
-        return "User created : " + signUpRequest.getName() + "님";
-
     }
 
     @Transactional
-    public String signIn(LoginRequest loginRequest) {
+    public void signIn(SignInRequest signInRequest) {
 
-        User user = userRepository.findByEmail(loginRequest.getEmail())
+        User user = userRepository.findByEmail(signInRequest.getEmail())
                 //TODO. ResponseError Class 만든 후 수정하기
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
         //TODO. ResponseError Class 만든 후 수정하기
-        if(!user.getPassword().equals(loginRequest.getPassword())) {
+        if(!user.getPassword().equals(signInRequest.getPassword())) {
             throw new RuntimeException("wrong password");
         }
 
         log.info("User signed in {}", user.getName());
-        return "User signed in : " + loginRequest.getEmail();
-
     }
 
     @Transactional
@@ -71,7 +67,6 @@ public class UserService {
         } else {
             log.info("user not found in updateUser {}", editUserRequest.getUserId());
             return "일치하는 회원 정보를 찾을 수 없습니다.";
-
         }
     }
 
